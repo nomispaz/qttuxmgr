@@ -11,6 +11,7 @@ do
     echo "3) Clean packages and kernel"
     echo "4) List Kernels"
     echo "5) Exit"
+    echo "6)"
     echo "Perform action (<Number>): "
     read action
     case "$action" in
