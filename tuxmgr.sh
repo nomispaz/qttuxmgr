@@ -13,6 +13,7 @@ do
     echo "5) Exit"
     echo "Perform action (<Number>): "
     read action
+    #test
     case "$action" in
         1)  case "$curDistro" in
                 gentoo) sudo emerge --sync
