@@ -42,5 +42,4 @@ do
         5)  break
             ;;
     esac
-    echo ""
 done
