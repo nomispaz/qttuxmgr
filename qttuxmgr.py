@@ -1,5 +1,5 @@
 import sys
-from subprocess import run
+from subprocess import run, Popen, PIPE
 from time import sleep
 
 from PyQt6.QtCore import QSize, Qt, QProcess, QByteArray
@@ -157,19 +157,32 @@ class QtTuxMgrWindow(QMainWindow):
         
         match self.vDistro:
             case "gentoo":
-                cmd = "sudo -S emerge -pvuDNg @world"
+                cmd = "sudo emerge -avuDNg @world"
                 #self.process.start('bash', ['-i', cmd])
                 
-        self.process.start('/bin/bash')
+        self.process.start('bash')
         self.sendCommandToProcess(cmd)
         self.getPassword()
         self.sendCommandToProcess(self.password)
         
         self.message("Continue?")
         self.message(self.okcancel)
-
-            
+        '''
+        proc = Popen(['kitty'], stdout=PIPE, stdin=PIPE, shell=True)
+        #proc.stdin.write('sudo emerge -avuDNg @world'.encode())
+        #proc.stdin.write('\n'.encode())
+        sleep(10)
+        proc.stdin.write('echo test'.encode())
+        proc.stdin.write('\n'.encode())
         
+        
+        while True:
+            line = proc.stdout.readline()
+            if not line:
+                break
+            #the real code does filtering here
+            print ("test:" + line.rstrip().decode())
+        '''
         #cleanup at the end
         self.okcancel = None
                 
